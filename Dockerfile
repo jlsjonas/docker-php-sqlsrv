@@ -55,6 +55,9 @@ RUN exec bash
 # install locales
 RUN apt-get install -y locales && echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && locale-gen
 
+# enable overrides
+run sed -i -e 's/None/All/g' /etc/apache2/apache2.conf
+
 EXPOSE 80
 
 WORKDIR /var/www/html/
