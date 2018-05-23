@@ -50,7 +50,7 @@ RUN mkdir /code
 ADD . /code
 WORKDIR /code
 
-CMD /bin/bash ./run-me.sh
+CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND", "-k", "start" ,"-e", "debug"]
 
 #enable rewriteengine
 RUN a2enmod rewrite
