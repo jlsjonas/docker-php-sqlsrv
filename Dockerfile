@@ -23,7 +23,7 @@ RUN /bin/bash -c "source ~/.bashrc"
 
 # php libraries
 RUN apt-get update && apt-get install -y \
-    apache2 php7.0 libapache2-mod-php7.0 mcrypt php7.0-mcrypt php-mbstring php-pear php7.0-dev \
+    apache2 php7.2 libapache2-mod-php7.2 mcrypt php7.2-mcrypt php-mbstring php-pear php7.2-dev \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
@@ -39,8 +39,8 @@ RUN pecl install sqlsrv pdo_sqlsrv
 #RUN echo "extension=/usr/lib/php/20151012/sqlsrv.so" >> /etc/php/7.0/cli/php.ini
 #RUN echo "extension=/usr/lib/php/20151012/pdo_sqlsrv.so" >> /etc/php/7.0/cli/php.ini
 
-RUN echo "extension=pdo_sqlsrv.so" >> /etc/php/7.0/apache2/conf.d/30-pdo_sqlsrv.ini
-RUN echo "extension=sqlsrv.so" >> /etc/php/7.0/apache2/conf.d/20-sqlsrv.ini
+RUN echo "extension=pdo_sqlsrv.so" >> /etc/php/7.2/apache2/conf.d/30-pdo_sqlsrv.ini
+RUN echo "extension=sqlsrv.so" >> /etc/php/7.2/apache2/conf.d/20-sqlsrv.ini
 
 # install additional utilities
 RUN apt-get update && apt-get install gettext nano vim -y
