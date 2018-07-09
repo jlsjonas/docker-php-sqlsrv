@@ -21,16 +21,21 @@ RUN apt-get update && ACCEPT_EULA=Y apt-get install -y mssql-tools
 RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
 RUN /bin/bash -c "source ~/.bashrc"
 
+# install necessary locales
+RUN apt-get update && apt-get install -y locales \
+    && echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
+    && locale-gen
+
+# php 7.2 on ubuntu 16.04
+RUN apt-get update && apt-get install -y software-properties-common
+RUN LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php
+RUN LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/apache2
+
 # php libraries
 RUN apt-get update && apt-get install -y \
     apache2 php7.2 libapache2-mod-php7.2 mcrypt php7.2-mcrypt php-mbstring php-pear php7.2-dev \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
-
-# install necessary locales
-RUN apt-get update && apt-get install -y locales \
-    && echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
-    && locale-gen
 
 # install SQL Server PHP connector module 
 RUN pecl install sqlsrv pdo_sqlsrv
