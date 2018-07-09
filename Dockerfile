@@ -33,7 +33,7 @@ RUN LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/apache2
 
 # php libraries
 RUN apt-get update && apt-get install -y \
-    apache2 php7.2 libapache2-mod-php7.2 mcrypt php7.2-mcrypt php-mbstring php-pear php7.2-dev \
+    apache2 php7.2 libapache2-mod-php7.2 php-mbstring php-pear php7.2-dev \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
